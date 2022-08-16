@@ -14,7 +14,7 @@ import { application, response } from 'express';
 import fetch from 'node-fetch';
 
 //puppeteer dependencies
-import start from './index.js'
+import start from './data.js'
 
 app.use(express.json())
 
