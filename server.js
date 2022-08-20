@@ -40,9 +40,9 @@ const getText = async (email) => {
 }
 
 app.post('/', (req, res) => {
-  response.setHeader('Content-Type', 'application/json')
-  return res.send( "Hello!" )
+  // response.setHeader('Content-Type', 'application/json')
   getText(req)
+  return res.send( req )
 })
 
 app.listen(app.get('port'), () => {
