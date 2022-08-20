@@ -3,7 +3,7 @@ import express from 'express';
 const app = express();
 import cors from 'cors';
 const corsOptions ={
-  origin:'*', 
+  origin: true, 
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200,
 }
