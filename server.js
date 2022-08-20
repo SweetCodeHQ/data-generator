@@ -40,7 +40,7 @@ const getText = async (email) => {
 }
 
 app.post('/', (req, res) => {
-  // response.setHeader('Content-Type', 'application/json')
+  response.setHeader('Content-Type', 'application/json')
   getText(req)
   return res.send( req )
 })
