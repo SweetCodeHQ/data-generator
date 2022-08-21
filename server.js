@@ -3,7 +3,8 @@ import express from 'express';
 const app = express();
 import cors from 'cors';
 app.use(cors({
-  origin: 'http://localhost:3000/'
+  origin: 'http://localhost:3000/',
+  methods: ['GET', 'POST']
 }));
 import { application, response } from 'express';
 
