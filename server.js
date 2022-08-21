@@ -2,16 +2,9 @@
 import express from 'express';
 const app = express();
 import cors from 'cors';
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
-// const corsOptions ={
-//   origin: true, 
-//   credentials:true,            //access-control-allow-credentials:true
-//   optionSuccessStatus:200,
-// }
-// app.use(cors(corsOptions));
+app.use(cors({
+  origin: 'http://localhost:3000/'
+}));
 import { application, response } from 'express';
 
 //Node-fetch
@@ -47,7 +40,7 @@ const getText = async (email) => {
 app.post('/', (req, res) => {
   request({ url: ['https://proj-mega.herokuapp.com/', 'http://localhost:3000/'] })
   getText(req)
-  res.json( req )
+  res.json({req})
 })
 
 app.listen(app.get('port'), () => {
