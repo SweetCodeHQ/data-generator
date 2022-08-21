@@ -41,8 +41,14 @@ const getText = async (req) => {
 
 app.post('/', (req, res) => {
   request({ url: ['https://proj-mega.herokuapp.com/', 'http://localhost:3000/'] })
+  res.send({Success: "You did it!"})
   getText(req)
-  res.json({req})
+  try {
+    let result = res.json()
+    console.log(result)
+  } catch (err) {
+    console.log("the post error", err)
+  }
 })
 
 app.listen(app.get('port'), () => {
