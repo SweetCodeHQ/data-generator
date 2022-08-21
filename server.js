@@ -1,5 +1,6 @@
 
 import express from 'express';
+import { app, res } from 'express';
 const app = express();
 import cors from 'cors';
 app.use(cors({
@@ -7,7 +8,6 @@ app.use(cors({
   methods: ['GET', 'POST'],
   credentials: true
 }));
-import { application, response } from 'express';
 
 //Node-fetch
 import fetch from 'node-fetch';
@@ -32,8 +32,8 @@ const postText = (text) => {
   .catch(error => console.log(error))
 }
 
-const getText = async (email) => {
-  let text = await start("http://www." + email.body.hd);
+const getText = async (req) => {
+  let text = await start("http://www." + req.body.hd);
   console.log("the text", text)
   postText(text)
 }
