@@ -1,13 +1,14 @@
 
 import express from 'express';
-import { app, res } from 'express';
 const app = express();
 import cors from 'cors';
-app.use(cors({
-  origin: 'http://localhost:3000',
-  methods: ['GET', 'POST'],
-  credentials: true
-}));
+const corsOptions ={
+  origin: true, 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200,
+}
+app.use(cors(corsOptions));
+import { application, response } from 'express';
 
 //Node-fetch
 import fetch from 'node-fetch';
@@ -32,23 +33,17 @@ const postText = (text) => {
   .catch(error => console.log(error))
 }
 
-const getText = async (req) => {
-  let text = await start("http://www." + req.body.hd);
+const getText = async (email) => {
+  let text = await start("http://www." + email.body.hd);
   console.log("the text", text)
   postText(text)
 }
 
 
 app.post('/', (req, res) => {
-  request({ url: ['https://proj-mega.herokuapp.com/', 'http://localhost:3000/'] })
-  res.send({Success: "You did it!"})
+  response.setHeader('Content-Type', 'application/json')
   getText(req)
-  try {
-    let result = res.json()
-    console.log(result)
-  } catch (err) {
-    console.log("the post error", err)
-  }
+  return res.send( req )
 })
 
 app.listen(app.get('port'), () => {
