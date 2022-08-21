@@ -45,9 +45,9 @@ const getText = async (email) => {
 
 
 app.post('/', (req, res) => {
-  request({ url: ['https://proj-mega.herokuapp.com', 'http://localhost:3000'] })
+  request({ url: ['https://proj-mega.herokuapp.com/', 'http://localhost:3000/'] })
   getText(req)
-  return res.send( req )
+  res.json( req )
 })
 
 app.listen(app.get('port'), () => {
