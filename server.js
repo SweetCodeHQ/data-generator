@@ -20,6 +20,7 @@ app.use(express.json())
 
 app.set('port', process.env.PORT || 8080);
 app.locals.title = 'Project Megaphone Server'
+app.locals.text = {email: null};
 
 const postText = (text) => {
   fetch('/megaphone-ai-api.herokuapp.com/api/v1/extractions', 
@@ -35,13 +36,20 @@ const postText = (text) => {
 
 const getText = async (email) => {
   let text = await start("http://www." + email.body.hd);
+  app.locals.text = { data: text }
   console.log("the text", text)
   postText(text)
 }
 
+app.get('/', (req, res) => {
+  res.send(app.locals.text)
+})
+
 
 app.post('/', (req, res) => {
   response.setHeader('Content-Type', 'application/json')
+  res.send(app.locals.text)
+  console.log(req)
   getText(req)
   return res.send.json( req )
 })
