@@ -13,14 +13,13 @@ const corsOptions ={
 }
 app.use(cors(corsOptions));
 app.use(express.json())
-import { application, response } from 'express';
+import { application } from 'express';
 
 //Node-fetch
 import fetch from 'node-fetch';
 
 app.set('port', process.env.PORT || 8080);
 app.locals.title = 'Project Megaphone Server'
-req.app.locals.text;
 
 
 const start = async (url) => {
@@ -53,13 +52,13 @@ const postText = (text) => {
 
 const getText = async (req) => {
   try {
-    let text = await start("http://fixate.io");
+    let text = await start("http://" + req.body.hd);
     console.log("the text", text)
-    req.app.locals.text = { data: text }
+    app.locals.text = { data: text }
+    postText(text)
   } catch(err) {
     console.log(err)
   }
-  postText(text)
 }
 
 app.get('/', (req, res) => {
@@ -68,10 +67,9 @@ app.get('/', (req, res) => {
 
 
 app.post('/', (req, res) => {
-  response.setHeader('Content-Type', 'application/json')
+  // response.setHeader('Content-Type', 'application/json')
   getText(req)
-  res.send(req.app.locals.text?.data)
-  console.log("the text", app?.locals?.text?.data)
+  res.send(app.locals.text?.data)
 })
 
 app.listen(app.get('port'), () => {
