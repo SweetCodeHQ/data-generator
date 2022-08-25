@@ -54,10 +54,11 @@ const getText = async (req) => {
   try {
     let text = await start("http://" + req.body.hd);
     console.log("the text", text)
-    app.locals.text = { data: text }
     postText(text)
+    return text;
   } catch(err) {
     console.log(err)
+    return err
   }
 }
 
@@ -68,8 +69,8 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   // response.setHeader('Content-Type', 'application/json')
-  getText(req)
-  res.json.send(app.locals.text?.data)
+  app.locals.text = getText(req)
+  res.send(app.locals.text)
 })
 
 app.listen(app.get('port'), () => {
