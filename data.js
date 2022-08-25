@@ -51,8 +51,8 @@ const postText = (text) => {
   .catch(error => console.log(error))
 }
 
-const getText = async () => {
-  let text = await start("http://www.fixate.io");
+const getText = async (req) => {
+  let text = await start("http://fixate.io");
   req.app.locals.text = { data: text }
   console.log("the text", text)
   postText(text)
@@ -65,7 +65,7 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   response.setHeader('Content-Type', 'application/json')
-  getText()
+  getText(req)
   res.send(req.app.locals.text?.data)
   console.log("the text", app?.locals?.text?.data)
 })
