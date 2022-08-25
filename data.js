@@ -52,9 +52,13 @@ const postText = (text) => {
 }
 
 const getText = async (req) => {
-  let text = await start("http://fixate.io");
-  req.app.locals.text = { data: text }
-  console.log("the text", text)
+  try {
+    let text = await start("http://fixate.io");
+    console.log("the text", text)
+    req.app.locals.text = { data: text }
+  } catch(err) {
+    console.log(err)
+  }
   postText(text)
 }
 
