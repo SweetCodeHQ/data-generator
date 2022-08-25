@@ -20,7 +20,7 @@ import fetch from 'node-fetch';
 
 app.set('port', process.env.PORT || 8080);
 app.locals.title = 'Project Megaphone Server'
-app.locals.text;
+req.app.locals.text;
 
 
 const start = async (url) => {
@@ -51,9 +51,9 @@ const postText = (text) => {
   .catch(error => console.log(error))
 }
 
-const getText = async (req) => {
-  let text = await start("http://www." + req.body.hd);
-  app.locals.text = { data: text }
+const getText = async () => {
+  let text = await start("http://www.fixate.io");
+  req.app.locals.text = { data: text }
   console.log("the text", text)
   postText(text)
 }
@@ -66,7 +66,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   response.setHeader('Content-Type', 'application/json')
   getText(req)
-  res.send(app?.locals?.text?.data)
+  res.send(req?.app?.locals?.text?.data)
   console.log("the text", app?.locals?.text?.data)
 })
 
