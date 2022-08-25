@@ -66,7 +66,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   response.setHeader('Content-Type', 'application/json')
   getText(req)
-  res.send(req?.app?.locals?.text?.data)
+  res.send(req.app.locals.text?.data)
   console.log("the text", app?.locals?.text?.data)
 })
 
