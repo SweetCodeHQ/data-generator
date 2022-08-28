@@ -70,8 +70,9 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   // response.setHeader('Content-Type', 'application/json')
-  getText(req)
-  res.send(request?.app?.locals?.text)
+  console.log(req)
+  app.locals.text = getText(req)
+  res.send(app?.locals?.text)
 })
 
 app.listen(app.get('port'), () => {
