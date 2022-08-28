@@ -71,10 +71,14 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   // response.setHeader('Content-Type', 'application/json')
   getText(req)
-  res.json.send("Nice work!")
+  res.json.send("Nice work!", req.hd)
 })
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is now running on ${app.get('port')}!`)
   console.log(start("http://fixate.io"))
 })
+
+//Since the getting the text from the scraper works,
+//I just need to be able to appropriately send the text back in response to the post method.
+//I just need to do this piece by piece, so maybe the first thing I try to send back is the email.
