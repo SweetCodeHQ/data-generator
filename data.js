@@ -38,6 +38,8 @@ const start = async (url) => {
   return text;
 }
 
+start("http://fixate.io")
+
 const postText = (text) => {
   fetch('/megaphone-ai-api.herokuapp.com/api/v1/extractions', 
   {
@@ -69,9 +71,10 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   // response.setHeader('Content-Type', 'application/json')
   getText(req)
-  res.send(app.locals.text?.data)
+  res.json.send("Nice work!")
 })
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is now running on ${app.get('port')}!`)
+  console.log(start("http://fixate.io"))
 })
