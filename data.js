@@ -23,7 +23,9 @@ app.locals.title = 'Project Megaphone Server'
 
 
 const start = async (url) => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    ignoreDefaultArgs: ['--disable-extensions'],
+  });
   const page = await browser.newPage();
   await page.goto(url);
 
