@@ -12,10 +12,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "request": "^2.88.0",
     "cors": "^2.8.5",
     "express": "^4.17.3",
+    "node.js": "^0.0.1-security",
     "nodemon": "^2.0.15",
-    "puppeteer": "^15.5.0"
+    "puppeteer": "^15.5.0",
+    "request": "^2.88.0"
   }
 }
