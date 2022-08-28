@@ -71,7 +71,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   // response.setHeader('Content-Type', 'application/json')
   getText(req)
-  res.json.send(req.body.hd)
+  res.send(req.body.hd)
 })
 
 app.listen(app.get('port'), () => {
