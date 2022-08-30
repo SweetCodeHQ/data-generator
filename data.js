@@ -73,9 +73,9 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   // response.setHeader('Content-Type', 'application/json')
-  console.log(req)
+  console.log("is this working? post request thing", req)
   app.locals.text = getText(req)
-  res.send({ message: req?.body})
+  res.send({ message: req})
 })
 
 app.listen(app.get('port'), () => {
