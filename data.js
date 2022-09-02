@@ -5,7 +5,7 @@ import fs from 'fs/promises';
 import express from 'express';
 const app = express();
 import cors from 'cors';
-const corsOptions ={
+const corsOptions = {
   origin: true, 
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200,
@@ -35,7 +35,7 @@ const start = async (url) => {
   await fs.writeFile('names.txt', names.join("\r\n"))
   
   const text = names.toString().replace('\n', '');
-  console.log("this is the text", text)
+  // console.log("this is the text", text)
   await browser.close();
   return text;
 }
@@ -55,7 +55,7 @@ const postText = (text) => {
 const getText = async (req) => {
   try {
     let text = await start("http://" + req.body.hd);
-    console.log("the text", text)
+    // console.log("the text", text)
     postText(text)
   } catch(err) {
     console.log(err)
@@ -67,7 +67,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  console.log("is this working? post request thing", req.body)
+  // console.log("is this working? post request thing", req.body)
   res.send({ message: req})
 })
 
