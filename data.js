@@ -81,7 +81,6 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   // response.setHeader('Content-Type', 'application/json')
   console.log("is this working? post request thing", req.body)
-  app.locals.text = start("http://fixate.io")
   res.send({ message: req?.body})
 })
 
