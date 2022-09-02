@@ -70,7 +70,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  res.json(req.body)
+  res.json("Hello")
 })
 
 app.listen(app.get('port'), () => {
