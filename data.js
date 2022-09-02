@@ -4,7 +4,7 @@ import fs from 'fs/promises';
 
 //EXPRESS DEPENDENCIES
 import express from 'express';
-const bodyparser = require('body-parser')
+import bodyparser from 'body-parser';
 const app = express();
 import cors from 'cors';
 const corsOptions ={
