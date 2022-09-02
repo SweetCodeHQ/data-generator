@@ -68,7 +68,7 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   console.log("is this working? post request thing", req.body)
-  res.send({ message: req.body})
+  res.send({ message: req})
 })
 
 app.listen(app.get('port'), () => {
