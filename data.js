@@ -4,6 +4,7 @@ import fs from 'fs/promises';
 
 //EXPRESS DEPENDENCIES
 import express from 'express';
+const bodyparser = require('body-parser')
 const app = express();
 import cors from 'cors';
 const corsOptions ={
@@ -13,7 +14,9 @@ const corsOptions ={
 }
 app.use(cors(corsOptions));
 app.use(express.json())
-import { application } from 'express';
+app.use(bodyparser.urlencoded({extended:false}))
+app.use(bodyparser.json())
+import { application, response } from 'express';
 
 //Node-fetch
 import fetch from 'node-fetch';
@@ -79,7 +82,7 @@ app.post('/', (req, res) => {
   // response.setHeader('Content-Type', 'application/json')
   console.log("is this working? post request thing", req)
   app.locals.text = start("http://fixate.io")
-  res.send({ message: app?.locals?.text})
+  res.send({ message: req.body.hd})
 })
 
 app.listen(app.get('port'), () => {
