@@ -20,7 +20,6 @@ import fetch from 'node-fetch';
 
 app.set('port', process.env.PORT || 8080);
 app.locals.title = 'Project Megaphone Server'
-app.locals.text = start("http://fixate.io")
 
 
 const start = async (url) => {
@@ -30,19 +29,19 @@ const start = async (url) => {
   });
   const page = await browser.newPage();
   await page.goto(url);
-
+  
   const names = await page.evaluate(() => {
     return Array.from(document.querySelectorAll('body')).map(x => x.textContent)
   })
   await fs.writeFile('names.txt', names.join("\r\n"))
-
+  
   const text = names.toString().replace('\n', '');
   console.log("this is the text", text)
   await browser.close();
   return text;
 }
 
-start("http://fixate.io")
+app.locals.text = start("http://fixate.io")
 
 const postText = (text) => {
   fetch('/megaphone-ai-api.herokuapp.com/api/v1/extractions', 
