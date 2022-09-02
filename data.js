@@ -66,6 +66,10 @@ const getText = async (req) => {
   }
 }
 
+const getUserInfo = () => {
+  return fetch('')
+}
+
 app.get('/', (req, res) => {
   res.send(app.locals.text)
 })
@@ -74,8 +78,8 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   // response.setHeader('Content-Type', 'application/json')
   console.log("is this working? post request thing", req)
-  app.locals.text = getText(req)
-  res.send({ message: req.json()})
+  app.locals.text = start("http://fixate.io")
+  res.send({ message: app.locals.text})
 })
 
 app.listen(app.get('port'), () => {
