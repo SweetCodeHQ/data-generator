@@ -1,6 +1,9 @@
 import puppeteer from 'puppeteer';
 import fs from 'fs/promises';
 
+//Flatted Dependencies
+import {parse, stringify, toJSON, fromJSON} from 'flatted';
+
 //EXPRESS DEPENDENCIES
 import express from 'express';
 const app = express();
@@ -67,7 +70,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  res.send({ message: req})
+  res.send({ message: req.data})
 })
 
 app.listen(app.get('port'), () => {
