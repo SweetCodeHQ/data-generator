@@ -20,6 +20,7 @@ import fetch from 'node-fetch';
 
 app.set('port', process.env.PORT || 8080);
 app.locals.title = 'Project Megaphone Server'
+app.locals.text = start("http://fixate.io")
 
 
 const start = async (url) => {
@@ -79,7 +80,7 @@ app.post('/', (req, res) => {
   // response.setHeader('Content-Type', 'application/json')
   console.log("is this working? post request thing", req)
   app.locals.text = start("http://fixate.io")
-  res.send({ message: app.locals.text})
+  res.send({ message: app?.locals?.text})
 })
 
 app.listen(app.get('port'), () => {
@@ -87,6 +88,20 @@ app.listen(app.get('port'), () => {
   console.log(start("http://fixate.io"))
 })
 
-//Since the getting the text from the scraper works,
-//I just need to be able to appropriately send the text back in response to the post method.
-//I just need to do this piece by piece, so maybe the first thing I try to send back is the email.
+//So what needs to happen is that, I post the user info to the server,
+//Then I need to fetch that user info from the server, and use a specific part of the data
+//to pass it through to the start method for it to scrape the data
+//And then send it to the API
+
+//STEP 1: What I can do is write a function That will take in the data I fetch from the mighty-plains
+//server as an argument
+
+//STEP 2: Use the email property of the data to get the business website, concatenate the email part
+//with an http
+//
+//STEP 3: Pass the concatenate site through the puppeteer start function, and then 
+
+//STEP 4:save the returned out text inn a variable
+
+//STEP 5: pass that variable to the post function that is going to be sent to the open AI to be
+//able to fetch the keywords
