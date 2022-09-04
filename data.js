@@ -76,6 +76,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
+  req.body
   res.end(JSON.stringify(req.body));
 })
 
