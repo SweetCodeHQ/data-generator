@@ -18,6 +18,12 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
+app.use((err, req, res, next) => {
+  // 'SyntaxError: Unexpected token n in JSON at position 0'
+  err.message;
+  next(err);
+
+});
 import { application, response } from 'express';
 
 //Node-fetch
@@ -70,7 +76,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  res.json(req)
+  res.end(JSON.stringify(req.body));
 })
 
 app.listen(app.get('port'), () => {
