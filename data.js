@@ -20,6 +20,7 @@ import { application, response } from 'express';
 //Body-Parser
 import bodyParser from 'body-parser';
 app.use(bodyParser.json())
+
 app.use((req, res => {
   res.setHeader('Content-Type', 'text/plain')
   res.write('you posted:\n')
