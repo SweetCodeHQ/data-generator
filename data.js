@@ -21,10 +21,10 @@ import { application, response } from 'express';
 import bodyParser from 'body-parser';
 app.use(bodyParser.json())
 
-app.use((req, res => {
-  res.setHeader('Content-Type', 'application/json')
-  res.write('you posted:\n')
-  res.end(JSON.stringify(req.body, null, 2))
+app.use((request, response => {
+  response.setHeader('Content-Type', 'application/json')
+  response.write('you posted:\n')
+  response.end(JSON.stringify(request.body, null, 2))
 }))
 
 app.set('port', process.env.PORT || 8080);
