@@ -1,9 +1,6 @@
 import puppeteer from 'puppeteer';
 import fs from 'fs/promises';
 
-//Flatted Dependencies
-import {parse, stringify, toJSON, fromJSON} from 'flatted';
-
 //EXPRESS DEPENDENCIES
 import express from 'express';
 const app = express();
@@ -19,10 +16,10 @@ app.use(cors(corsOptions));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use((err, req, res, next) => {
-  // 'SyntaxError: Unexpected token n in JSON at position 0'
-  err.message;
-  next(err);
-
+  res.setHeader('Content-type', 'application/json')
+  res.write('you posted!')
+  res.end(JSON.stringify(req.body, null, 2))
+  console.log(req.body)
 });
 import { application, response } from 'express';
 
@@ -70,10 +67,6 @@ const getText = async (req) => {
     console.log(err)
   }
 }
-
-app.get('/', (req, res) => {
-  res.send(app.locals.text)
-})
 
 app.post('/', (req, res) => {
   req.body
