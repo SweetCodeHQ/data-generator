@@ -24,7 +24,7 @@ app.use((req, res => {
   res.setHeader('Content-Type', 'text/plain')
   res.write('you posted:\n')
   res.end(JSON.stringify(req.body, null, 2))
-})
+}))
 
 app.set('port', process.env.PORT || 8080);
 app.locals.title = 'Project Megaphone Server'
