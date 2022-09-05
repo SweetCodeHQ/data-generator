@@ -14,17 +14,17 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
-app.use((err, req, res, next) => {
-  res.setHeader('Content-type', 'application/json')
-  res.write('you posted!')
-  res.end(JSON.stringify(req.body, null, 2))
-  console.log(req.body)
-});
+
 import { application, response } from 'express';
 
-//Node-fetch
-import fetch from 'node-fetch';
+//Body-Parser
+import bodyParser from 'body-parser';
+app.use(bodyParser.json())
+app.use((req, res => {
+  res.setHeader('Content-Type', 'text/plain')
+  res.write('you posted:\n')
+  res.end(JSON.stringify(req.body, null, 2))
+})
 
 app.set('port', process.env.PORT || 8080);
 app.locals.title = 'Project Megaphone Server'
