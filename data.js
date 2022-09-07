@@ -4,29 +4,29 @@ import fs from 'fs/promises';
 //EXPRESS DEPENDENCIES
 import express from 'express';
 const app = express();
-import cors from 'cors';
+app.use(express.json())
 
+//CORS Dependencies
+import cors from 'cors';
 const corsOptions = {
   origin: true, 
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200,
 }
-
 app.use(cors(corsOptions));
-app.use(express.json())
 
 import { application, response } from 'express';
 
 //Body-Parser
 import bodyParser from 'body-parser';
-app.use(bodyParser.json())
+app.use(bodyParser.json({ type: 'application/*+json' }))
 
-app.use((request, response => {
-  response.setHeader('Content-Type', 'application/json')
-  response.write('you posted:\n')
-  response.end(JSON.stringify(request.body, null, 2))
-}))
-
+// app.use((request, response => {
+//   response.setHeader('Content-Type', 'application/json')
+//   response.write('you posted:\n')
+//   response.end(JSON.stringify(request.body, null, 2))
+// }))
+ 
 app.set('port', process.env.PORT || 8080);
 app.locals.title = 'Project Megaphone Server'
 
@@ -70,6 +70,7 @@ const getText = async (req) => {
 }
 
 app.post('/', (req, res) => {
+  console.log(req.body)
   req.body
   res.end(JSON.stringify(req.body));
 })
