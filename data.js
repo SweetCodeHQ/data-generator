@@ -62,7 +62,7 @@ const postText = (text) => {
 
 const getText = async (req) => {
   try {
-    let text = await start("http://" + req.body.hd);
+    let text = await start("https://" + req.body.hd);
     postText(text)
   } catch(err) {
     console.log(err)
