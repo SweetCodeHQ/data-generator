@@ -72,7 +72,7 @@ const getText = async (req) => {
 app.post('/', (req, res) => {
   console.log(req.body)
   req.body
-  res.end(JSON.stringify(req.body));
+  res.send(JSON.stringify(req.body));
 })
 
 app.listen(app.get('port'), () => {
