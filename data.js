@@ -49,11 +49,12 @@ const start = async (url) => {
 }
 
 const postText = (text) => {
+
   fetch('/megaphone-ai-api.herokuapp.com/api/v1/extractions', 
   {
     method: 'POST',
     headers: { 'Content-Type': 'application/json'},
-    body: JSON.stringify(text)
+    body: JSON.stringify({words: text})
   })
   .then(response => response.json())
   .then(data => console.log("what we get from posting", data))
@@ -62,7 +63,7 @@ const postText = (text) => {
 
 const getText = async (req) => {
   try {
-    let text = await start("https://" + req.body.hd);
+    let text = await start("https://" + req.hd);
     postText(text)
   } catch(err) {
     console.log(err)
@@ -70,9 +71,9 @@ const getText = async (req) => {
 }
 
 app.post('/', (req, res) => {
-  console.log(req.body)
-  req.body
   res.send(JSON.stringify(req.body));
+  console.log(req.body)
+  getText(req.body)
 })
 
 app.listen(app.get('port'), () => {
