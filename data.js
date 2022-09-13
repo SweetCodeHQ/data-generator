@@ -21,11 +21,8 @@ import { application, response } from 'express';
 import bodyParser from 'body-parser';
 app.use(bodyParser.json({ type: 'application/*+json' }))
 
-// app.use((request, response => {
-//   response.setHeader('Content-Type', 'application/json')
-//   response.write('you posted:\n')
-//   response.end(JSON.stringify(request.body, null, 2))
-// }))
+//Node-Fetch
+import fetch from 'node-fetch';
  
 app.set('port', process.env.PORT || 8080);
 app.locals.title = 'Project Megaphone Server'
@@ -49,8 +46,7 @@ const start = async (url) => {
 }
 
 const postText = (text) => {
-
-  fetch('/megaphone-ai-api.herokuapp.com/api/v1/extractions', 
+  fetch('megaphone-ai-api.herokuapp.com/api/v1/extractions', 
   {
     method: 'POST',
     headers: { 'Content-Type': 'application/json'},
@@ -64,7 +60,8 @@ const postText = (text) => {
 const getText = async (req) => {
   try {
     let text = await start("https://" + req.hd);
-    postText(text)
+    console.log(text)
+    // postText({words: text})
   } catch(err) {
     console.log(err)
   }
@@ -73,7 +70,8 @@ const getText = async (req) => {
 app.post('/', (req, res) => {
   res.send(JSON.stringify(req.body));
   console.log(req.body)
-  getText(req.body)
+  let userInfo = req.body
+  getText(userInfo)
 })
 
 app.listen(app.get('port'), () => {

@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "flatted": "^3.2.7",
+    "node-fetch": "^3.2.10",
     "node.js": "^0.0.1-security",
     "nodemon": "^2.0.15",
     "puppeteer": "^15.5.0"
