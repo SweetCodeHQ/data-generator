@@ -45,27 +45,27 @@ const start = async (url) => {
   return text;
 }
 
-const postText = (text) => {
-  fetch('megaphone-ai-api.herokuapp.com/api/v1/extractions', 
-  {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json'},
-    body: JSON.stringify({words: text})
-  })
-  .then(response => response.json())
+const postText = (words) => {
+  console.log("the post body", words)
+  fetch('https://megaphone-ai-api.herokuapp.com/api/v1/extractions', { params: words })
+  .then(response => response)
   .then(data => console.log("what we get from posting", data))
-  .catch(error => console.log(error))
+  .catch(error => console.log("err msg", error))
 }
 
 const getText = async (req) => {
   try {
-    let text = await start("https://" + req.hd);
-    console.log(text)
-    // postText({words: text})
+    let webText = await start("https://" + req.hd);
+    let textObject = {text : webText}
+    postText(textObject)
   } catch(err) {
     console.log(err)
   }
 }
+
+app.get('/', (req, res) => {
+  res.send(app.locals.keywords)
+})
 
 app.post('/', (req, res) => {
   res.send(JSON.stringify(req.body));
@@ -77,16 +77,3 @@ app.post('/', (req, res) => {
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is now running on ${app.get('port')}!`)
 })
-
-//STEP 1: What I can do is write a function That will take in the data I fetch from the mighty-plains
-//server as an argument
-
-//STEP 2: Use the email property of the data to get the business website, concatenate the email part
-//with an http
-//
-//STEP 3: Pass the concatenate site through the puppeteer start function, and then 
-
-//STEP 4:save the returned out text inn a variable
-
-//STEP 5: pass that variable to the post function that is going to be sent to the open AI to be
-//able to fetch the keywords
