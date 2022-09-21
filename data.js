@@ -57,8 +57,7 @@ const postText = (words) => {
 const getText = async (req) => {
   try {
     let webText = await start("https://" + req.hd);
-    const words = {text: webText}
-    postText(words)
+    postText(webText)
   } catch(err) {
     console.log(err)
   }
