@@ -50,7 +50,7 @@ const postText = (words) => {
   console.log("the post body", typeof words)
   fetch('https://megaphone-ai-api.herokuapp.com/api/v1/extractions', { params: words })
   .then(response => response.json())
-  .then(data => { app.locals.keywords = data })
+  .then(data => { app.locals.keywords = data})
   .catch(error => console.log("err msg", error))
 }
 
