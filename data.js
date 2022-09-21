@@ -40,24 +40,25 @@ const start = async (url) => {
   })
   await fs.writeFile('names.txt', names.join("\r\n"))
   
-  const text = names.toString().replace('\n', '');
+  const text = names.toString();
+  const cleanText = text.replace("/", "")
   await browser.close();
-  return text;
+  return cleanText;
 }
 
 const postText = (words) => {
   console.log("the post body", words)
   fetch('https://megaphone-ai-api.herokuapp.com/api/v1/extractions', { params: words })
-  .then(response => response)
-  .then(data => console.log("what we get from posting", data))
+  .then(response => response.json())
+  .then(data => { app.locals.keywords = data })
   .catch(error => console.log("err msg", error))
 }
 
 const getText = async (req) => {
   try {
     let webText = await start("https://" + req.hd);
-    let textObject = {text : webText}
-    postText(textObject)
+    let text = webText.toString()
+    postText(text)
   } catch(err) {
     console.log(err)
   }
