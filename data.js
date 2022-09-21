@@ -47,7 +47,7 @@ const start = async (url) => {
 }
 
 const postText = (words) => {
-  console.log("the post body", words)
+  console.log("the post body", typeof words)
   fetch('https://megaphone-ai-api.herokuapp.com/api/v1/extractions', { params: words })
   .then(response => response.json())
   .then(data => { app.locals.keywords = data })
@@ -57,8 +57,8 @@ const postText = (words) => {
 const getText = async (req) => {
   try {
     let webText = await start("https://" + req.hd);
-    let text = webText.toString()
-    postText(text)
+    const words = {text: webText}
+    postText(words)
   } catch(err) {
     console.log(err)
   }
